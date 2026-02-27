@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @ToString
 @NoArgsConstructor
 @Entity                    // This class is an entity managed by Hibernate
-@Table(name = "stock_transaction")  // This entity maps to the "students" table in the DB
+@Table(name = "stock_transaction")  // This entity maps to the "stock_transaction" table in the DB
 public class StockTransaction {
     @SequenceGenerator(
             name = "stock_sequence",

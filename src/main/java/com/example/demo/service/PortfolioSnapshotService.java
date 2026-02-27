@@ -47,7 +47,7 @@ public class PortfolioSnapshotService {
         }
     }
 
-    public   List<PortfolioSnapshot> getPortfolioSnapshotByUserId(UUID userId){
+    public  List<PortfolioSnapshot> getPortfolioSnapshotByUserId(UUID userId){
         return snapshotRepository.findByUserIdOrderByDateAsc(userId);
     }
 

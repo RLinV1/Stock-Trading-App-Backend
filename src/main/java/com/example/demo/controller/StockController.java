@@ -27,7 +27,6 @@ public class StockController {
         return stockService.getStocks();
     }
 
-
     @PostMapping
     public ResponseEntity<?> addStock(@RequestBody Stock stock){
         try {
@@ -42,14 +41,17 @@ public class StockController {
     public List<Stock> searchStocks(@RequestParam String query) {
         return stockService.searchStocks(query);
     }
+
     @GetMapping("/{id}")
     public Stock getStockById(@PathVariable Long id){
         return stockService.getStockById(id);
     }
+
     @DeleteMapping("/{id}")
     public void deleteStock(@PathVariable Long id) {
         stockService.deleteStock(id);
     }
+
     @PutMapping("/{id}")
     public Stock updateStock(@PathVariable Long id,
                             @RequestParam(required = false) String symbol,

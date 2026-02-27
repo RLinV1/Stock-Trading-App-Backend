@@ -13,8 +13,6 @@ public class AuthResponseDto {
     private String username;
     private List<String> roles;
 
-
-
     public AuthResponseDto(String accessToken, String refreshToken, String username, List<String> roles) {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
