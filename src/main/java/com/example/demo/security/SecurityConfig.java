@@ -95,7 +95,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         // 1. Allowed origins — which domains are allowed to make cross-origin requests
-        configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:8080")); //TODO: update backend url
+        configuration.setAllowedOrigins(List.of("https://stock-trading-app-gamma.vercel.app/", "https://stock-trading-app-backend-production.up.railway.app")); //TODO: update backend url
 
         // 2. Allowed HTTP methods from those origins
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
