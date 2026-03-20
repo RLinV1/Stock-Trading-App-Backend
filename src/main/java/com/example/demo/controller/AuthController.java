@@ -121,18 +121,18 @@ public class AuthController {
 
             ResponseCookie accessTokenCookie = ResponseCookie.from("accessToken", token)
                     .httpOnly(true)       // prevent JS access
-                    .secure(false)         // true if using HTTPS
+                    .secure(true)         // true if using HTTPS
                     .path("/")            // make accessible across the site
                     .maxAge(Duration.ofMinutes(60)) // short-lived
-                    .sameSite("Strict")
+                    .sameSite("None")
                     .build();
 
             ResponseCookie refreshTokenCookie = ResponseCookie.from("refreshToken", newRefreshToken)
                     .httpOnly(true)
-                    .secure(false) // true in production HTTPS
+                    .secure(true) // true in production HTTPS
                     .path("/api/auth") // only send cookie on refresh endpoint
                     .maxAge(Duration.ofDays(7)) // adjust as needed
-                        .sameSite("Strict")
+                        .sameSite("None")
                     .build();
 
 
@@ -171,19 +171,19 @@ public class AuthController {
             // Set new access token cookie
             ResponseCookie accessCookie = ResponseCookie.from("accessToken", newAccessToken)
                     .httpOnly(true)
-                    .secure(false) // set true in production HTTPS
+                    .secure(true) // set true in production HTTPS
                     .path("/")
                     .maxAge(Duration.ofMinutes(60))
-                    .sameSite("Strict")
+                    .sameSite("None")
                     .build();
 
             // Set new refresh token cookie
             ResponseCookie refreshCookie = ResponseCookie.from("refreshToken", newRefreshToken)
                     .httpOnly(true)
-                    .secure(false) // set true in production HTTPS
+                    .secure(true) // set true in production HTTPS
                     .path("/api/auth/refresh")
                     .maxAge(Duration.ofDays(7))
-                    .sameSite("Strict")
+                    .sameSite("None")
                     .build();
 
             response.addHeader(HttpHeaders.SET_COOKIE, accessCookie.toString());
