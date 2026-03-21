@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.AuthResponseDto;
 import com.example.demo.dto.LoginDto;
+import com.example.demo.dto.UserLeaderboardDto;
 import com.example.demo.dto.RegisterDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.models.RefreshToken;
@@ -223,6 +224,14 @@ public class AuthController {
 
         // Return user info DTO (avoid sensitive info like password)
         return ResponseEntity.ok(new UserDto(user.getUsername(), user.getId(), roleNames, user.getCash()));
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<UserLeaderboardDto>> getAllUsers() {
+        List<UserLeaderboardDto> users = userRepository.findAll().stream()
+                .map(user -> new UserLeaderboardDto(user.getUsername(), user.getCash()))
+                .toList();
+        return ResponseEntity.ok(users);
     }
 
     @PostMapping("signout")
