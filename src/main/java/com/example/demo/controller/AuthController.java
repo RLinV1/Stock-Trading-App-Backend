@@ -13,6 +13,7 @@ import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.security.JWTGenerator;
 import com.example.demo.service.AuthService;
+import com.example.demo.service.UserStockService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -47,12 +48,13 @@ public class AuthController {
     private final JWTGenerator jwtGenerator;
     private final RefreshTokenRepository refreshTokenRepository;
     private final AuthService authService;
+    private final UserStockService userStockService;
 
     @Autowired
     public AuthController(PasswordEncoder passwordEncoder, RoleRepository roleRepository,
                           UserRepository userRepository, AuthenticationManager authenticationManager,
                           JWTGenerator jwtGenerator, RefreshTokenRepository refreshTokenRepository,
-                          AuthService authService) {
+                          AuthService authService, UserStockService userStockService) {
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
@@ -60,6 +62,7 @@ public class AuthController {
         this.jwtGenerator = jwtGenerator;
         this.refreshTokenRepository = refreshTokenRepository;
         this.authService = authService;
+        this.userStockService = userStockService;
     }
 
     @PostMapping("register")
@@ -229,7 +232,7 @@ public class AuthController {
     @GetMapping("/users")
     public ResponseEntity<List<UserLeaderboardDto>> getAllUsers() {
         List<UserLeaderboardDto> users = userRepository.findAll().stream()
-                .map(user -> new UserLeaderboardDto(user.getUsername(), user.getCash()))
+                .map(user -> new UserLeaderboardDto(user.getUsername(), userStockService.getUserPortfolioValue(user.getId())))
                 .toList();
         return ResponseEntity.ok(users);
     }
