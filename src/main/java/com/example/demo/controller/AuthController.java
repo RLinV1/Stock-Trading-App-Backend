@@ -232,7 +232,7 @@ public class AuthController {
     @GetMapping("/users")
     public ResponseEntity<List<UserLeaderboardDto>> getAllUsers() {
         List<UserLeaderboardDto> users = userRepository.findAll().stream()
-                .map(user -> new UserLeaderboardDto(user.getUsername(), userStockService.getUserPortfolioValue(user.getId())))
+                .map(user -> new UserLeaderboardDto(user.getUsername(), userStockService.getUserPortfolioValue(user.getId()), user.getCash()))
                 .toList();
         return ResponseEntity.ok(users);
     }
